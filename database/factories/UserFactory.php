@@ -32,6 +32,14 @@ class UserFactory extends Factory
         ];
     }
 
+
+// إضافة حالة (State) لإنشاء مسؤول
+public function admin()
+{
+    return $this->state(fn (array $attributes) => [
+        'email' => 'admin@aid.com', //   ايميل ثابت
+    ]);
+}
     /**
      * Indicate that the model's email address should be unverified.
      */
