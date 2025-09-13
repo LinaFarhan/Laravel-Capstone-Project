@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
-
+use Faker\Factory as FakerFactory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Distribution>
  */
@@ -20,13 +20,13 @@ class DistributionFactory extends Factory
         // نحتاج التأكد من وجود متطوعين في قاعدة البيانات أولاً
         // نستخدم User::inRandomOrder()->first()?->id للحصول على ID موجود
         // أو ننشئ مستخدم جديد إذا لم يوجد
-        $volunteer = User::factory()->create();
-
+           $faker= FakerFactory::create('ar _SA');
+        $cities=['تعز','صنعاء', 'عدن','المكلا','مارب','سقطرى','الجوف'];
         return [
-            'volunteer_id' => $volunteer->id,
-            'title' => $this->faker->sentence(3),
-            'location' => $this->faker->address(),
-            'distribution_date' => $this->faker->dateTimeBetween('now', '+1 month'),
+            'volunteer_id' => User::factory(),
+            'title' =>$faker->sentence(2),
+            'location' =>$faker->address(),
+            'distribution_date' =>$faker->dateTimeBetween('now', '+1 month'),
             'status' => $this->faker->randomElement(['scheduled', 'in_progress', 'completed']),
         ];
     }
