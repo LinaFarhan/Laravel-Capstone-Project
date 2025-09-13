@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      * Seed the application's database.
      */
    // database/seeders/DatabaseSeeder.php
+// database/seeders/DatabaseSeeder.php
 public function run(): void
 {
     // إنشاء مسؤول
@@ -21,17 +22,20 @@ public function run(): void
 
     // إنشاء 3 متطوعين (كل منهم له volunteerProfile)
     $volunteers = User::factory()->count(3)
-        ->has(VolunteerProfile::factory()) // أنشئ profile لكل متطوع
+        ->has(VolunteerProfile::factory())
         ->create();
 
-    // إنشاء 10 طلب مساعدة (لكل طلب beneficiary جديد)
-    AidRequest::factory()->count(10)->create();
+    // إنشاء 10 طلب مساعدة
+    $aidRequests = AidRequest::factory()->count(10)->create();
 
-    // (اختياري) إنشاء عمليات توزيع وتعيينها لطلبات
-    Distribution::factory()->count(5)
-        ->hasAttached( // ربطها بطلبات عشوائية
-            AidRequest::factory()->count(2),
-            ['created_at' => now(), 'updated_at' => now()]
-        )->create();
+    // إنشاء 5 عمليات توزيع
+    $distributions = Distribution::factory()->count(5)->create();
+
+    // ربط عمليات التوزيع بطلبات مساعدة عشوائية
+    foreach ($distributions as $distribution) {
+        // نربط كل توزيع ب 2-4 طلبات عشوائية
+        $randomAidRequests = $aidRequests->random(rand(2, 4));
+        $distribution->aidRequests()->attach($randomAidRequests);
+    }
 }
 }
