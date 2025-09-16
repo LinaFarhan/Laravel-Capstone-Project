@@ -4,32 +4,19 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
-use Faker\Factory as FakerFactory;
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\AidRequest>
- */
+
 class AidRequestFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-  // database/factories/AidRequestFactory.php
-public function definition(): array
-{
-     $faker= FakerFactory::create('ar _SA');
-     $cities=['تعز','صنعاء', 'عدن','المكلا','مارب','سقطرى','الجوف'];
-    return [
-        'beneficiary_id' => User::factory(), // ينشئ مستفيد (user) تلقائياً
-        'title' => fake()->sentence(3),
-        'description' => fake()->paragraph(),
-        'quantity' => fake()->numberBetween(1, 5),
-        'id_card_path' => 'ids/' . fake()->word() . '.jpg',
-        'address' => fake()->address(),
-        'city' => $faker->randomElement($cities),
-        'status' => fake()->randomElement(['pending', 'approved', 'rejected']),
-        'rejection_reason'=>$faker->optional()->sentence()
-    ];
-}
+    public function definition(): array
+    {
+        return [
+            'beneficiary_id' => User::factory(), // سينشئ مستفيد جديد
+            'type' => $this->faker->randomElement(['medical', 'financial', 'food', 'shelter']),
+            'description' => $this->faker->sentence(10),
+            'status' => $this->faker->randomElement(['pending', 'approved', 'denied']),
+            'document_url' => 'documents/' . $this->faker->word() . '.jpg',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+    }
 }

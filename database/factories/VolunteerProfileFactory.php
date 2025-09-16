@@ -18,12 +18,12 @@ class VolunteerProfileFactory extends Factory
    // database/factories/VolunteerProfileFactory.php
 public function definition(): array
 {
-    $faker= FakerFactory::create('ar _SA');
+    $faker= \Faker\Factory::create('ar _SA');
     return [
         'user_id' => User::factory(), // سيُنشئ user تلقائياً
-        'phone' => fake()->phoneNumber(),
-        'address' => fake()->address(),
-        'skills' => fake()->randomElement(['إدارة', 'اتصال', 'إسعافات أولية','لوجستيات']),
+        'phone' =>'04'. $faker->numerify('###########'),
+        'address' =>$faker->city().'،حي '. $faker->word(),
+        'skills' =>$faker->randomElement(['إدارة', 'اتصال', 'إسعافات أولية','لوجستيات']),
     ];
 }
 }
