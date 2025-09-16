@@ -9,20 +9,36 @@ class Distribution extends Model
 {
     use HasFactory;
 
+    // الحقول القابلة للتعبئة
     protected $fillable = [
-        'volunteer_id', 'title', 'location',
-        'distribution_date', 'status'
+        'volunteer_id',
+        'beneficiary_id',
+        'donation_id',
+        'delivery_status',
+        'proof_file',
     ];
 
-    // العلاقة مع المتطوع
+    /**
+     * العلاقة مع المتطوع (User)
+     */
     public function volunteer()
     {
         return $this->belongsTo(User::class, 'volunteer_id');
     }
 
-    // العلاقة مع طلبات المساعدة (Many-to-Many)
-    public function aidRequests()
+    /**
+     * العلاقة مع المستفيد (User)
+     */
+    public function beneficiary()
     {
-        return $this->belongsToMany(AidRequest::class);
+        return $this->belongsTo(User::class, 'beneficiary_id');
+    }
+
+    /**
+     * العلاقة مع التبرع (Donation)
+     */
+    public function donation()
+    {
+        return $this->belongsTo(Donation::class, 'donation_id');
     }
 }

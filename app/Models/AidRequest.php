@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,20 +8,28 @@ class AidRequest extends Model
 {
     use HasFactory;
 
+    // الحقول القابلة للتعبئة
     protected $fillable = [
-        'beneficiary_id', 'title', 'description', 'quantity',
-        'id_card_path', 'address', 'city', 'status', 'rejection_reason'
+        'beneficiary_id',
+        'type',
+        'description',
+        'status',
+        'document_url',
     ];
 
-    // العلاقة مع المستفيد
+    /**
+     * العلاقة مع المستفيد (User)
+     */
     public function beneficiary()
     {
         return $this->belongsTo(User::class, 'beneficiary_id');
     }
 
-    // العلاقة مع عمليات التوزيع (Many-to-Many)
+    /**
+     * العلاقة مع التوزيعات (Distributions)
+     */
     public function distributions()
     {
-        return $this->belongsToMany(Distribution::class);
+        return $this->hasMany(Distribution::class, 'aid_request_id');
     }
 }

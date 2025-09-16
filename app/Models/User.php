@@ -21,6 +21,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+         'role',
+          'phone',
+           'address',
     ];
 
     /**
@@ -33,6 +36,32 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function isAdmin(){
+        return $this->role==='admin';
+    }
+     public function isVolunteer(){
+        return $this->role==='volunteer';
+    }
+     public function isBeneficiary(){
+        return $this->role==='beneficiary';
+    }
+      // العلاقة مع طلبات المساعدة (كمستفيد)
+    public function aidRequests()
+    {
+        return $this->hasMany(AidRequest::class, 'beneficiary_id');
+    }
+
+    // العلاقة مع عمليات التوزيع (كمتطوع)
+    public function distributions()
+    {
+        return $this->hasMany(Distribution::class, 'volunteer_id');
+    }
+
+    // العلاقة مع الملف الشخصي للمتطوع
+    public function volunteerProfile()
+    {
+        return $this->hasOne(VolunteerProfile::class);
+    }
     /**
      * Get the attributes that should be cast.
      *
@@ -46,3 +75,5 @@ class User extends Authenticatable
         ];
     }
 }
+
+
