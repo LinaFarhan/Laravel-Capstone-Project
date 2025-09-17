@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('donations', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+    $table->id();
+    $table->string('donor_name');
+    $table->enum('type', ['food', 'clothing', 'medical', 'financial', 'other']);
+    $table->integer('quantity');
+    $table->enum('status', ['pending', 'received', 'distributed', 'expired']);
+    $table->text('description')->nullable();
+    $table->timestamps();
         });
     }
 

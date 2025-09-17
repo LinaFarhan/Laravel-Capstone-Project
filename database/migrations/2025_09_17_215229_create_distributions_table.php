@@ -13,7 +13,13 @@ return new class extends Migration
     {
         Schema::create('distributions', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+    $table->foreignId('volunteer_id')->constrained('users');
+    $table->foreignId('beneficiary_id')->constrained('users');
+    $table->foreignId('donation_id')->constrained('donations');
+    $table->enum('delivery_status', ['assigned', 'in_progress', 'delivered', 'cancelled']);
+    $table->string('proof_file')->nullable();
+    $table->text('notes')->nullable();
+    $table->timestamps();
         });
     }
 

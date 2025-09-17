@@ -12,8 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('aid_requests', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+    $table->id();
+    $table->foreignId('beneficiary_id')->constrained('users');
+    $table->enum('type', ['food', 'clothing', 'medical', 'financial', 'other']);
+    $table->text('description');
+    $table->enum('status', ['pending', 'approved', 'denied'])->default('pending');
+    $table->string('document_url')->nullable();
+    $table->timestamps();
         });
     }
 
