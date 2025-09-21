@@ -1,47 +1,92 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.guest')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@section('title', 'تسجيل الدخول - منصة المساعدات الإنسانية')
 
-        <!-- Email Address -->
+@section('content')
+<div class="min-h-screen flex items-center justify-center bg-humanitarian py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8">
         <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-white">🤝</h1>
+                <h2 class="mt-4 text-3xl font-bold text-white">منصة المساعدات الإنسانية</h2>
+                <p class="mt-2 text-blue-100">سجل الدخول إلى حسابك</p>
+            </div>
+        </div>
+        
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <form class="space-y-6" method="POST" action="{{ route('login') }}">
+                @csrf
+
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">البريد الإلكتروني</label>
+                    <input id="email" name="email" type="email" required 
+                           class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                           placeholder="ادخل بريدك الإلكتروني">
+                    @error('email')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">كلمة المرور</label>
+                    <input id="password" name="password" type="password" required 
+                           class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                           placeholder="ادخل كلمة المرور">
+                    @error('password')
+                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input id="remember_me" name="remember" type="checkbox" 
+                               class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                        <label for="remember_me" class="mr-2 block text-sm text-gray-900">تذكرني</label>
+                    </div>
+
+                    @if (Route::has('password.request'))
+                    <a class="text-sm text-blue-600 hover:text-blue-500" href="{{ route('password.request') }}">
+                        نسيت كلمة المرور؟
+                    </a>
+                    @endif
+                </div>
+
+                <div>
+                    <button type="submit" 
+                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-humanitarian hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        تسجيل الدخول
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-6">
+                <div class="relative">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-gray-300"></div>
+                    </div>
+                    <div class="relative flex justify-center text-sm">
+                        <span class="px-2 bg-white text-gray-500">أو</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 text-center">
+                    <p class="text-sm text-gray-600">
+                        ليس لديك حساب؟ 
+                        <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500">
+                            سجل الآن
+                        </a>
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <!-- Security Badge -->
+        <div class="text-center">
+            <p class="text-xs text-blue-200 flex items-center justify-center">
+                <span class="ml-1">🔒</span>
+                نظام آمن ومحمي
+            </p>
         </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+</div>
+@endsection
