@@ -1,61 +1,222 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+منصة للمساعدات الانسانية
+تقدم الخدمات للمستفيد من خلال الطلباتى التي يسجلها ثم توزع في التوزيعات بواسطة المتطوع 
+هذا ما تشملة المنصة
+مستفيد
+ومتطوع
+ومسؤول
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+مبنية ب
+-laravel
+-php
+-xammp
+-mysql
+-vue.js
+--------------------------------
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+*DATABASE
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+ -Migrations
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+ 1-users_table
+ 2-donation_table
+ 3-aid_requests_table
+ 4-distributions_table
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+ -Factories
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+1-UserFactory
+2-DonationFactory
+3-AidRequestFactory
+4-DistributionFactory
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+ -Seeders
 
-## Laravel Sponsors
+ 1-UserSeeder
+2-DonationSeeder
+3-AidRequestSeeder
+4-DistributionSeeder
+5-DatabaseSeeder
+-----------------------------------------------
+- MODELS
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+ 1-User
+ 2-Donation
+ 3-AidRequest
+ 4-Distribution
+--------------------------------------------------------------
+ *SECURITY
 
-### Premium Partners
+ -Middleware
+ ( kernel.php)
+ 1-AdminMiddleware
+ 2-VolunteerMiddleware
+ 3-BeneficiaryMiddleware
+ ------
+ فائدة middleware
+ يعتبر الحارس على التطبيق
+ تتحق من الصلاحيات قبل الوصول الى الروتر
+ ترجع المستخدمين الغير المصرح لهم الى الصفحات المناسبة
+ تضمن الامان ومنع الوصول غير المصرح بع 
+ --------------
+الفائدة من ( kernel.php)
+نضمن فيه middleware
+يدير middlewareالعام الذي ينطبق عل جميع الطلبات
+يحدد لمجموعات routes 
+يحدد ذات الاولوية التي تعمل اولا
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
 
-## Contributing
+ -Policies
+ 
+  1-UserPolicy
+  2-DonationPolicy
+  3-AidRequestPolicy
+  4-DistributionPolicy
+ 
+ الفائدة منها
+ تحكم دقيق في الصلاحيات على مستوى الموديل
+ اعادة استخدام الكود  لتحقق من الصلاحيات
+ قراءة وسهولة صيانة لقواعد الصلاحيات
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+ -Auth
+-Providers
+المكان الذي تسجل فيه سيايات الصاحيات لتطبيق
+   -AuthServiceProvider.php
+ -----------------------------------------------------------------  
+ *CONTROLLERS
 
-## Code of Conduct
+ -Controllers
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+ 1-Admin
+   1-AdminController
+   2-UserController
+   3-DonationController
+   4-AidRequestController
+   5-DistributionController
+ 2-Volunteer
+   1-VolunteerController
+   2-DistributionController
+3-Beneficiary
+   1-BeneficiaryController
+   2-AidRequestController
+4-APi
+   1-Beneficiary
+     -AidRequestController
+   2-Volunteer
+     -DistributionController
+ 5-NotifictionController    
 
-## Security Vulnerabilities
+ -Requestes(form)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+ 1-StoreAidRequestRequest
+ 2-UpdateAidRequestRequest
+ 3-StoreDonationRequest
+ 4-UpdateDistributionRequest
 
-## License
+6-Notification
+(config/notification.php->channels)
+   1-DonationReceivedNotrification
+   2-AidRequestDoniedNotification
+   3-AidRequestApprovedNotification 
+   4-DistributionAssignedNotification
+*الخلاصة 
+نظام اشعارات 
+جدول في قاعدة البيانات-علاقات في المودل
+ اشعارات للseeder,factory
+ تحكم كامل لادارة الاشعارات
+ واجهة لعرض الاشعارات 
+ مكون vue.jsللاشعارات العاجلة
+دعم real-timeباستخدامlaravel echo
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+ *VIEWS
+ -Views
+ *Blade
+1- Admin
+
+  1- dashboard.blade.php
+   2-users
+    -index.blade.php
+
+   3-donnations
+    -index.blade.php
+
+   4-aid-requests
+     -index.blade.php
+
+   5-distributions
+    -index.blade.php
+    -show.blade.php
+  
+
+ 2-volunteer
+
+  1- dashboard.blade.php
+
+  2-distributions
+    -index.blade.php
+    -show.blade.php
+
+ 3-beneficiary
+
+  1- dashboard.blade.php
+
+  2-aid-requests
+   -create.blade.php
+   -show.blade.php
+
+ 4-layout
+ 1-app.blade.php
+ 2-guest.blade.php
+ --------
+ -Vue
+ js-
+  -Components
+  1-Admin
+   -StatsDashboard.vue
+   -Recentivities.vue
+
+  2-Volunteer
+  -DistributionList.vue
+  -DistributionStatus.vue
+
+  3-Beneficiary
+  -AidRequestsForm.vue
+  -RequestHistory.vue
+
+  4-Shared
+  -NotifiactionToast.vue
+  -FileUpload.vue
+  -StatusBadge.vue
+
+  5-UI
+  -Modal.vue
+  -Alert.vue
+
+ -Styling
+ -app.css
+ ---------------------------------------------------------------
+ *Route
+ -Api.php
+ -web.php
+ -api._v1.php
+
+ *TESTS
+ -Unit Tests
+-Feature  
+ -AdminDasboardTest
+ -BeneficiaryAidRequestTest
+ -VolunteerDitributionTest
+ -AuthenticationTest
+ -ApiTest
+ 
+
+ *RUN
+ -Build
+ -Serve
+ -Optimize
+ 
+ *DOCUMANTION
+ -README
+ -API DOCS
+ -Presentation
