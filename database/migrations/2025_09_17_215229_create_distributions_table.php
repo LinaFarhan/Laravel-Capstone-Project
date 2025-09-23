@@ -19,6 +19,8 @@ return new class extends Migration
     $table->enum('delivery_status', ['assigned', 'in_progress', 'delivered', 'cancelled']);
     $table->string('proof_file')->nullable();
     $table->text('notes')->nullable();
+    $table->foreignId('aid_request_id')->constrained('aid_requests');
+
     $table->timestamps();
         });
     }
