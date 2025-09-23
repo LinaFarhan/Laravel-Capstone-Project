@@ -82,7 +82,7 @@ const processFiles = (newFiles) => {
   
   const validFiles = newFiles.filter(file => {
     if (file.size > props.maxSize * 1024 * 1024) {
-      error.value = الحد الأقصى لحجم الملف هو ${props.maxSize}MB
+      error.value =' الحد الأقصى لحجم الملف هو ${props.maxSize}MB';
       return false
     }
     return true
