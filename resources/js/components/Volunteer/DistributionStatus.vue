@@ -77,7 +77,7 @@ const updateStatus = async () => {
       formData.append('proof_file', form.proof_file)
     }
     
-    const response = await fetch(/api/volunteer/distributions/${props.distribution.id}, {
+    const response = await fetch('/api/volunteer/distributions/${props.distribution.id}', {
       method: 'POST',
       body: formData,
       headers: {

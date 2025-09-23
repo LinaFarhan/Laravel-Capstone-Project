@@ -63,7 +63,7 @@ const alertConfig = {
 
 const config = computed(() => alertConfig[props.type] || alertConfig.info)
 
-const alertClasses = computed(() => ${config.value.bg} ${config.value.border})
+const alertClasses = computed(() =>' ${config.value.bg} ${config.value.border}')
 const iconColor = computed(() => config.value.text)
 const textColor = computed(() => config.value.text)
 const icon = computed(() => config.value.icon)
