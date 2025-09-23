@@ -12,72 +12,8 @@
     
     <!-- Styles -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    
-    <style>
-        :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --secondary: #10b981;
-            --accent: #f59e0b;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --success: #10b981;
-            --info: #3b82f6;
-            --light: #f8fafc;
-            --dark: #1e293b;
-            --gray: #64748b;
-        }
-        
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: #f1f5f9;
-        }
-        
-        .bg-humanitarian {
-            background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
-        }
-        
-        .card-hover:hover {
-            transform: translateY(-2px);
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        
-        .stat-card {
-            border-radius: 15px;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        }
-        
-        .sidebar {
-            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-            min-height: 100vh;
-        }
-        
-        .nav-link {
-            border-radius: 10px;
-            margin: 5px 0;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            background-color: rgba(255,255,255,0.1);
-            transform: translateX(-5px);
-        }
-        
-        .btn-humanitarian {
-            background: linear-gradient(135deg, #2563eb 0%, #10b981 100%);
-            border: none;
-            border-radius: 10px;
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-humanitarian:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
-        }
-    </style>
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+   
 </head>
 <body class="bg-gray-50">
     <div class="min-h-screen">
