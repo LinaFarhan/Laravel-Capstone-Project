@@ -9,16 +9,31 @@ use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
+    /* تعرض قائمة المستخدمين مرتبة حسب تاريخ الإنشاء تنازليًا.
+
+تستخدم Pagination (10 مستخدمين لكل صفحة).
+
+ترسل المتغير $users إلى view admin.users.index. */
     public function index()
     {
         $users = User::orderBy('created_at', 'desc')->paginate(10);
         return view('admin.users.index', compact('users'));
     }
+    /* تعرض نموذج إضافة مستخدم جديد.
+
+لا تحتاج بيانات مسبقة. */
 
     public function create()
     {
         return view('admin.users.create');
     }
+    /* يتحقق من صحة البيانات (validate) قبل الإدخال.
+
+يشفر كلمة المرور باستخدام bcrypt.
+
+ينشئ المستخدم باستخدام User::create($validated).
+
+يعيدك لقائمة المستخدمين مع رسالة نجاح. */
 
     public function store(Request $request)
     {
@@ -38,11 +53,17 @@ class UserController extends Controller
         return redirect()->route('admin.users.index')
             ->with('success', 'تم إنشاء المستخدم بنجاح');
     }
+    /* تعرض نموذج تعديل المستخدم مع تمرير بيانات المستخدم المحدد. */
 
     public function edit(User $user)
     {
         return view('admin.users.edit', compact('user'));
     }
+    /* يتحقق من صحة البيانات.
+
+يسمح بتحديث كلمة المرور فقط إذا تم تعبئتها.
+
+يقوم بتحديث بيانات المستخدم. */
 
     public function update(Request $request, User $user)
     {
@@ -67,6 +88,12 @@ class UserController extends Controller
             ->with('success', 'تم تحديث المستخدم بنجاح');
     }
 
+    /* 
+تحذف المستخدم المحدد.
+
+تعيدك لقائمة المستخدمين مع رسالة نجاح.
+
+ */
     public function destroy(User $user)
     {
         $user->delete();

@@ -48,6 +48,7 @@ class AidRequestController extends Controller
 
     public function show(AidRequest $aidRequest)
     {
+          $this->authorize('view', $aidRequest);
         // التحقق من أن الطلب مخصص لهذا المستفيد
         if ($aidRequest->beneficiary_id !== Auth::id()) {
             abort(403, 'غير مصرح بالوصول إلى هذا الطلب');
@@ -73,6 +74,7 @@ class AidRequestController extends Controller
 
     public function update(UpdateAidRequestRequest $request, AidRequest $aidRequest)
     {
+         $this->authorize('update', $aidRequest);
         if ($aidRequest->beneficiary_id !== Auth::id()) {
             abort(403, 'غير مصرح بتعديل هذا الطلب');
         }
