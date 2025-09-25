@@ -98,12 +98,12 @@ class NotificationController extends Controller
             if ($request->ajax() || $request->wantsJson()) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'تم标记 الإشعار كمقروء'
+                    'message' => 'تم  الإشعار كمقروء'
                 ]);
             }
 
             return redirect()->back()
-                ->with('success', 'تم标记 الإشعار كمقروء');
+                ->with('success', 'تم الإشعار كمقروء');
         } catch (\Exception $e) {
             Log::error('Error marking notification as read: ' . $e->getMessage());
             

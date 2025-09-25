@@ -19,7 +19,7 @@
             {{-- الشعار أصغر --}}
             <img src="https://tse4.mm.bing.net/th/id/OIP.SbxL2ir4kMfaSxgvlSk5RgAAAA?rs=1&pid=ImgDetMain&o=7&rm=3"
                  alt="شعار إنساني"
-                 class="w-20 h-20 mb-4 drop-shadow-lg">
+                 class=" mb-4 drop-shadow-lg">
 
             {{-- العنوان والنص متوسط --}}
             <h1 class="text-3xl font-extrabold text-red-700 mb-2">مرحبًا بك</h1>
@@ -36,11 +36,11 @@
                 <a href="{{ route('login') }}" 
                    class="flex-1 px-6 py-3 bg-red-600 text-white font-semibold rounded-xl shadow-lg hover:bg-red-700 hover:shadow-xl transition duration-300 text-center">
                     تسجيل الدخول
+               <a href="{{ route('register.choose') }}" 
+                    class="flex-1 px-6 py-3 bg-gray-500 text-white font-semibold rounded-xl shadow-lg hover:bg-orange-600 hover:shadow-xl transition duration-300 text-center">
+                       إنشاء حساب
                 </a>
-                <a href="{{ route('register') }}" 
-                   class="flex-1 px-6 py-3 bg-gray-500 text-white font-semibold rounded-xl shadow-lg hover:bg-orange-600 hover:shadow-xl transition duration-300 text-center">
-                    إنشاء حساب
-                </a>
+
             </div>
 
         </div>

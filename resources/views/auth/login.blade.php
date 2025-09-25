@@ -8,8 +8,8 @@
         <div>
             <div class="text-center">
                 <h1 class="text-4xl font-bold text-white">🤝</h1>
-                <h2 class="mt-4 text-3xl font-bold text-white">منصة المساعدات الإنسانية</h2>
-                <p class="mt-2 text-blue-100">سجل الدخول إلى حسابك</p>
+                <h2 class="mt-4 text-3xl font-bold text-red-500">منصة المساعدات الإنسانية</h2>
+                <p class="mt-2 text-gray-700">سجل الدخول إلى حسابك</p>
             </div>
         </div>
         
@@ -18,7 +18,7 @@
                 @csrf
 
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-700">البريد الإلكتروني</label>
+                    <label for="email" class="block text-sm font-bold text-gray-700">البريد الإلكتروني</label>
                     <input id="email" name="email" type="email" required 
                            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                            placeholder="ادخل بريدك الإلكتروني">
@@ -28,7 +28,7 @@
                 </div>
 
                 <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700">كلمة المرور</label>
+                    <label for="password" class="block text-sm font-bold text-gray-700">كلمة المرور</label>
                     <input id="password" name="password" type="password" required 
                            class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                            placeholder="ادخل كلمة المرور">
@@ -41,11 +41,11 @@
                     <div class="flex items-center">
                         <input id="remember_me" name="remember" type="checkbox" 
                                class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                        <label for="remember_me" class="mr-2 block text-sm text-gray-900">تذكرني</label>
+                        <label for="remember_me" class="mr-2 block text-sm  text-gray-900">تذكرني</label>
                     </div>
 
                     @if (Route::has('password.request'))
-                    <a class="text-sm text-blue-600 hover:text-blue-500" href="{{ route('password.request') }}">
+                    <a class="text-sm font-bold text-blue-600 hover:text-blue-500" href="{{ route('password.request') }}">
                         نسيت كلمة المرور؟
                     </a>
                     @endif
@@ -53,7 +53,7 @@
 
                 <div>
                     <button type="submit" 
-                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-humanitarian hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-humanitarian hover:bg-blue-700 focus:outline-none bg-gray-500 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                         تسجيل الدخول
                     </button>
                 </div>
@@ -72,7 +72,7 @@
                 <div class="mt-6 text-center">
                     <p class="text-sm text-gray-600">
                         ليس لديك حساب؟ 
-                        <a href="{{ route('register') }}" class="font-medium text-blue-600 hover:text-blue-500">
+                        <a href="{{ route('register.choose') }}" class="font-medium text-blue-600 hover:text-blue-500">
                             سجل الآن
                         </a>
                     </p>
@@ -82,7 +82,7 @@
 
         <!-- Security Badge -->
         <div class="text-center">
-            <p class="text-xs text-blue-200 flex items-center justify-center">
+            <p class="text-xs text-gray-700  font-bold flex items-center justify-center">
                 <span class="ml-1">🔒</span>
                 نظام آمن ومحمي
             </p>

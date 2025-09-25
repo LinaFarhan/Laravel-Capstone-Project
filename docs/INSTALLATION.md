@@ -51,6 +51,8 @@ copmoser install
 npm install
 مشاكل قاعدة البيانات
 php artisan migrate:fresh
+تاكد من الاتصال
+php artisan migrate:status
 
 php artisan db:seed
 php artisan migrate:fresh --seed
