@@ -7,8 +7,8 @@
 <div class="bg-white rounded-lg shadow-sm p-6">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-bold text-gray-800">📦 تفاصيل المهمة</h2>
-        <span class="px-4 py-2 rounded-full text-sm 
-            {{ $distribution->delivery_status === 'delivered' ? 'bg-green-100 text-green-800' : 
+        <span class="px-4 py-2 rounded-full text-sm
+            {{ $distribution->delivery_status === 'delivered' ? 'bg-green-100 text-green-800' :
                ($distribution->delivery_status === 'in_progress' ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-800') }}">
             {{ $distribution->delivery_status }}
         </span>
@@ -35,9 +35,25 @@
     <!-- Update Status Form -->
     <div class="bg-yellow-50 p-4 rounded-lg mb-6">
         <h3 class="font-semibold mb-3">🔄 تحديث حالة التسليم</h3>
-        <form action="{{ route('volunteer.distributions.update-status', $distribution) }}" method="POST" 
+        <form action="{{ route('volunteer.distributions.update-status', $distribution) }}" method="POST"
               enctype="multipart/form-data">
             @csrf
+
+    
+
+    @if(session('success'))
+<script>
+    window.dispatchEvent(new CustomEvent('toast', {
+        detail: {
+            title: 'نجاح',
+            message: @json(session('success')),
+            type: 'success'
+        }
+    }));
+</script>
+@endif
+
+
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700">الحالة</label>
@@ -54,7 +70,7 @@
             </div>
             <div class="mt-4">
                 <label class="block text-sm font-medium text-gray-700">ملاحظات</label>
-                <textarea name="notes" rows="3" class="mt-1 block w-full border-gray-300 rounded-lg" 
+                <textarea name="notes" rows="3" class="mt-1 block w-full border-gray-300 rounded-lg"
                           placeholder="أضف أي ملاحظات حول عملية التوزيع">{{ $distribution->notes }}</textarea>
             </div>
             <div class="mt-4">
@@ -72,8 +88,8 @@
             <p><strong>تاريخ الإنشاء:</strong> {{ $distribution->created_at->format('Y-m-d H:i') }}</p>
             <p><strong>آخر تحديث:</strong> {{ $distribution->updated_at->format('Y-m-d H:i') }}</p>
             @if($distribution->proof_file)
-            <p><strong>إثبات التسليم:</strong> 
-                <a href="{{ asset('storage/' . $distribution->proof_file) }}" target="_blank" 
+            <p><strong>إثبات التسليم:</strong>
+                <a href="{{ asset('storage/' . $distribution->proof_file) }}" target="_blank"
                    class="text-blue-600 hover:text-blue-900">عرض الصورة</a>
             </p>
             @endif
@@ -81,3 +97,11 @@
     </div>
 </div>
 @endsection
+
+
+
+{{-- - عرض معلومات المستفيد والتبرع: واضح ومنظم.
+- نموذج تحديث الحالة: يحتوي على الحقول المطلوبة (delivery_status, proof_file, notes) ويرتبط بالدالة updateStatus() في الكنترولر.
+- عرض إثبات التسليم بعد رفعه: يظهر الرابط بشكل آمن باستخدام
+asset().
+ --}}

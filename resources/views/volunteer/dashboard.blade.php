@@ -54,14 +54,17 @@
                     <h4 class="font-semibold">{{ $distribution->beneficiary->name }}</h4>
                     <p class="text-sm text-gray-600">{{ $distribution->donation->type }} - {{ $distribution->donation->quantity }} وحدة</p>
                     <p class="text-sm text-gray-500">{{ $distribution->beneficiary->address }}</p>
+                        @if($distribution->proof_file)
+                    <span class="text-xs text-green-600 block mt-1">📎 تم رفع إثبات</span>
+    @endif
                 </div>
                 <div class="text-center">
-                    <span class="px-3 py-1 rounded-full text-xs 
-                        {{ $distribution->delivery_status === 'delivered' ? 'bg-green-100 text-green-800' : 
+                    <span class="px-3 py-1 rounded-full text-xs
+                        {{ $distribution->delivery_status === 'delivered' ? 'bg-green-100 text-green-800' :
                            ($distribution->delivery_status === 'in_progress' ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-800') }}">
                         {{ $distribution->delivery_status }}
                     </span>
-                    <a href="{{ route('volunteer.distributions.show', $distribution) }}" 
+                    <a href="{{ route('volunteer.distributions.show', $distribution) }}"
                        class="block mt-2 text-blue-600 hover:text-blue-900 text-sm">عرض التفاصيل</a>
                 </div>
             </div>
@@ -86,4 +89,16 @@
         </div>
     </div>
 </div>
+@if(session('success'))
+<script>
+    window.dispatchEvent(new CustomEvent('toast', {
+        detail: {
+            title: 'نجاح',
+            message: @json(session('success')),
+            type: 'success'
+        }
+    }));
+</script>
+@endif
+
 @endsection

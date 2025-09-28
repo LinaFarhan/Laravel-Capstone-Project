@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -13,7 +13,7 @@ class AidRequestController extends Controller
         $aidRequests = AidRequest::with('beneficiary')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-            
+
         return view('admin.aid-requests.index', compact('aidRequests'));
     }
 

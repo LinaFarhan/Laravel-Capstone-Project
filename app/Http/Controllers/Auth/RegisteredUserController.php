@@ -34,13 +34,22 @@ public function store(Request $request): RedirectResponse
         'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
         'password' => ['required', 'confirmed', Rules\Password::defaults()],
         'role' => ['required', 'in:admin,volunteer,beneficiary'], // تحقق من صحة الدور
-    ]);
+        'phone' => ['nullable', 'string', 'max:20'],
+        'document_path' => ['nullable', 'file', 'mimes:jpg,jpeg,png,pdf', 'max:2048'],
+    ]); 
+
+    $documentPath = null;
+if ($request->hasFile('document_path')) {
+    $documentPath = $request->file('document_path')->store('documents', 'public');
+}
 
     $user = User::create([
         'name' => $request->name,
         'email' => $request->email,
         'password' => Hash::make($request->password),
         'role' => $request->role, // حفظ الدور
+        'phone' => $request->phone,
+        'document_path' => $documentPath,
     ]);
 
     event(new Registered($user));

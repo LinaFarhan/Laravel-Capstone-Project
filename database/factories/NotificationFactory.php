@@ -7,7 +7,8 @@ use Illuminate\Notifications\DatabaseNotification;
 
 class NotificationFactory extends Factory
 {
-    protected $model = DatabaseNotification::class;
+   protected $model = \App\Models\Notification::class;
+
 
     public function definition(): array
     {

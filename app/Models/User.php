@@ -7,6 +7,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\DatabaseNotification;
+use App\Models\AidRequest;
+use App\Models\Distribution;
+
+/**
+ * @mixin IdeHelperUser
+ */
 class User extends Authenticatable
 {
 

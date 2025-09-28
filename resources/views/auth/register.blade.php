@@ -8,7 +8,7 @@
     <h1 class="text-2xl font-bold mb-6 text-center">إنشاء حساب جديد</h1>
 
     
-    <form id="registerForm" method="POST" action="{{ route('register') }}">
+    <form id="registerForm" method="POST" action="{{ route('register') }}"  enctype="multipart/form-data">
         @csrf
 
         <!-- الاسم -->
@@ -50,6 +50,24 @@
             <input id="password_confirmation" type="password" name="password_confirmation" required
                    class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400">
         </div>
+        <!-- رقم الهاتف -->
+<div class="mb-4">
+    <label for="phone" class="block text-gray-700 font-semibold mb-2">رقم الهاتف</label>
+    <input id="phone" type="text" name="phone" value="{{ old('phone') }}"
+           class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400" required>
+    @error('phone')
+        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+    @enderror
+</div>
+<!-- رفع وثيقة (صورة أو PDF) -->
+<div class="mb-4">
+    <label for="document_path" class="block text-gray-700 font-semibold mb-2">الوثيقة (صورة أو PDF)</label>
+    <input id="document_path" type="file" name="document_path" accept=".jpg,.jpeg,.png,.pdf"
+           class="block w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-blue-400" required>
+    @error('document_path')
+        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+    @enderror
+</div>
 
         <!-- الحقل المخفي للدور -->
         <input type="hidden" name="role" value="{{ request('role', 'beneficiary') }}">

@@ -45,19 +45,13 @@ class PasswordResetLinkController extends Controller
     }
     public function storeDirect(Request $request): \Illuminate\Http\RedirectResponse
 {
-    // تحقق من البريد
-    $request->validate([
-        'email' => ['required', 'email'],
-    ]);
+    $request->validate(['email' => ['required', 'email']]);
 
-    // الحصول على المستخدم
     $user = \App\Models\User::where('email', $request->email)->firstOrFail();
 
-    // إنشاء توكن مؤقت عشوائي
     $token = Str::random(64);
 
-    // حفظ التوكن في جدول password_resets
-    DB::table('password_resets')->updateOrInsert(
+    DB::table('password_reset_tokens')->updateOrInsert(
         ['email' => $request->email],
         [
             'token' => Hash::make($token),
@@ -65,11 +59,9 @@ class PasswordResetLinkController extends Controller
         ]
     );
 
-    // إعادة التوجيه مباشرةً لصفحة Reset Password
     return redirect()->route('password.reset', [
         'token' => $token,
         'email' => $request->email
     ]);
 }
-
 }

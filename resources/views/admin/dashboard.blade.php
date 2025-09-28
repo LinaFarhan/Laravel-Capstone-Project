@@ -4,7 +4,9 @@
 @section('subtitle', 'نظرة عامة على المنصة والإحصائيات')
 
 @section('content')
-<div class="space-y-6">
+<div id="app" class="space-y-6">
+    <stats-dashboard></stats-dashboard>
+    <recent-activities></recent-activities>
     <!-- Statistics Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div class="stat-card bg-white p-6 card-hover">
@@ -70,8 +72,8 @@
                         <p class="font-medium">{{ $request->beneficiary->name }}</p>
                         <p class="text-sm text-gray-600">{{ $request->type }} - {{ $request->created_at->diffForHumans() }}</p>
                     </div>
-                    <span class="px-2 py-1 rounded-full text-xs 
-                        {{ $request->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 
+                    <span class="px-2 py-1 rounded-full text-xs
+                        {{ $request->status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
                            ($request->status === 'approved' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800') }}">
                         {{ $request->status }}
                     </span>
@@ -94,8 +96,8 @@
                         <p class="font-medium">{{ $donation->donor_name }}</p>
                         <p class="text-sm text-gray-600">{{ $donation->type }} - {{ $donation->quantity }} وحدة</p>
                     </div>
-                    <span class="px-2 py-1 rounded-full text-xs 
-                        {{ $donation->status === 'received' ? 'bg-green-100 text-green-800' : 
+                    <span class="px-2 py-1 rounded-full text-xs
+                        {{ $donation->status === 'received' ? 'bg-green-100 text-green-800' :
                            ($donation->status === 'pending' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-800') }}">
                         {{ $donation->status }}
                     </span>

@@ -1,14 +1,14 @@
 <?php
- 
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Support\Facades\Auth;
 class UpdateDistributionRequest extends FormRequest
 {
     public function authorize()
     {
-        return auth()->check() && (auth()->user()->isAdmin() || auth()->user()->isVolunteer());
+        return $this->check() && ($this->user()->isAdmin() || $this->user()->isVolunteer());
     }
 
     public function rules()

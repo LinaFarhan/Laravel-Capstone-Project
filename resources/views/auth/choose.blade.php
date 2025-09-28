@@ -6,7 +6,7 @@
 <div class=" flex items-center justify-center min-h-screen">
 <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md text-center">
     <h1 class="text-2xl font-bold text-gray-800 mb-4">اختر نوع الحساب</h1>
-    <p class="text-gray-600 mb-6">من فضلك اختر نوع الحساب الذي تريد إنشاؤه:</p>
+    <p class="text-red-600 mb-6">من فضلك اختر نوع الحساب الذي تريد إنشاؤه:</p>
 
     <div class="space-y-4">
         <a href="{{ route('register', ['role' => 'beneficiary']) }}" 

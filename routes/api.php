@@ -31,7 +31,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Routes API للمستفيدين
     Route::prefix('beneficiary')->name('api.beneficiary.')->middleware(['beneficiary'])->group(function () {
         Route::apiResource('aid-requests', BeneficiaryAidRequestController::class);
-        
+
         Route::get('profile', function (\Illuminate\Http\Request $request) {
             return response()->json($request->user());
         })->name('profile');
@@ -40,13 +40,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Routes API للمتطوعين
     Route::prefix('volunteer')->name('api.volunteer.')->middleware(['volunteer'])->group(function () {
         Route::apiResource('distributions', VolunteerDistributionController::class)->only(['index', 'show', 'update']);
-        
+
         Route::post('distributions/{distribution}/proof', [VolunteerDistributionController::class, 'updateWithProof'])
             ->name('distributions.update-proof');
-            
+
         Route::get('stats', function (\Illuminate\Http\Request $request) {
             $user = $request->user();
-            
+
             return response()->json([
                 'total_assignments' => $user->volunteerDistributions()->count(),
                 'completed_deliveries' => $user->volunteerDistributions()->where('delivery_status', 'delivered')->count(),
@@ -59,12 +59,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('admin')->name('api.admin.')->middleware(['admin'])->group(function () {
         Route::get('stats', [StatsController::class, 'index'])->name('stats');
         Route::get('activities', [StatsController::class, 'activities'])->name('activities');
-        
+
         Route::get('reports/donations', function () {
             // TODO: Implement donation reports
             return response()->json(['message' => 'Donation reports endpoint']);
         })->name('reports.donations');
-        
+
         Route::get('reports/distributions', function () {
             // TODO: Implement distribution reports
             return response()->json(['message' => 'Distribution reports endpoint']);

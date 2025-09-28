@@ -72,3 +72,6 @@ php artisan --filter=AdminDashboardTest
 *run
  php artisan serve
  php artisan serve --port=8000
+ 
+ composer require barryvdh/laravel-debugbar --devcomposer require barryvdh/laravel-debugbar --dev
+composer require barryvdh/laravel-debugbar --dev

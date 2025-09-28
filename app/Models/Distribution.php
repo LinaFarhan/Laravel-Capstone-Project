@@ -4,7 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\Donation;
+use App\Models\AidRequest;
 
+/**
+ * @mixin IdeHelperDistribution
+ */
 class Distribution extends Model
 {
     use HasFactory;

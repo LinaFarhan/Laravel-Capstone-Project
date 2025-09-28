@@ -34,7 +34,9 @@
 import { ref, onMounted } from 'vue'
 
 const notifications = ref([])
-
+window.addEventListener('toast', (e) => {
+  addNotification(e.detail);
+});
 const removeNotification = (index) => {
   notifications.value.splice(index, 1)
 }
@@ -53,9 +55,9 @@ const addNotification = (data) => {
     icon: getIcon(data.type),
     time: new Date().toLocaleTimeString('ar-EG')
   }
-  
+
   notifications.value.push(notification)
-  
+
   // Auto remove after 5 seconds
   setTimeout(() => {
     const index = notifications.value.indexOf(notification)
@@ -64,6 +66,7 @@ const addNotification = (data) => {
     }
   }, 5000)
 }
+
 
 const getIcon = (type) => {
   const icons = {

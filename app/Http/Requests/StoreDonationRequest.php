@@ -1,16 +1,18 @@
 <?php
- 
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreDonationRequest extends FormRequest
 {
-    public function authorize()
-    {
-        return auth()->check() && auth()->user()->isAdmin();
-    }
+    /*  يتحقق من أن المستخدم مسؤول أو متطوع */
+public function authorize()
+{
+    return $this->user() && ($this->user()->isAdmin() ||$this->user()->isVolunteer());
+}
 
+    /*  يتحقق من حالة التوصيل، الملف، والملاحظات */
     public function rules()
     {
         return [

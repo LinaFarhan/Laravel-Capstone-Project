@@ -1,28 +1,35 @@
 <?php
- 
 namespace App\Http\Controllers\Volunteer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Distribution;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Gate;
 class DistributionController extends Controller
 {
+    /* - يعرض قائمة التوزيعات الخاصة بالمتطوع.
+- يستخدم with() لجلب بيانات المستفيد والتبرع.
+- يفلتر حسب volunteer_id ويعرض النتائج بترتيب تنازلي.
+ */
     public function index()
     {
         $distributions = Distribution::with(['beneficiary', 'donation'])
             ->where('volunteer_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-            
+
         return view('volunteer.distributions.index', compact('distributions'));
     }
 
+    /* - يعرض تفاصيل توزيع معين.
+- يتحقق من أن المتطوع هو صاحب التوزيع.
+- يحمل العلاقات المرتبطة: المستفيد، التبرع، طلب المساعدة.
+ */
     public function show(Distribution $distribution)
     {
         // التحقق من أن التوزيع مخصص لهذا المتطوع
-        if ($distribution->volunteer_id !== Auth::id()) {
+        if ($distribution->volunteer_id !== Gate::authorize('update', $distribution)) {
             abort(403, 'غير مصرح بالوصول إلى هذا التوزيع');
         }
 
@@ -30,9 +37,17 @@ class DistributionController extends Controller
         return view('volunteer.distributions.show', compact('distribution'));
     }
 
+
+    /* - يسمح للمتطوع بتحديث حالة التوزيع.
+- يتحقق من الصلاحية.
+- يتحقق من صحة البيانات (delivery_status, proof_file, notes).
+- يحفظ الملف في مجلد public/proofs.
+- يحدث السجل ويعيد التوجيه مع رسالة نجاح.
+ */
+
     public function updateStatus(Request $request, Distribution $distribution)
     {
-        if ($distribution->volunteer_id !== Auth::id()) {
+        if ($distribution->volunteer_id !== Gate::authorize('update', $distribution)) {
             abort(403, 'غير مصرح بتحديث هذا التوزيع');
         }
 

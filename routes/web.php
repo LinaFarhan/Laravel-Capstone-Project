@@ -15,6 +15,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\NewPasswordController;
 
+
+
 // الصفحة الرئيسية
 Route::get('/', function () {
     return view('welcome');
@@ -94,6 +96,24 @@ Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])->
 
 Route::post('reset-password', [NewPasswordController::class, 'store'])->middleware('guest')->name('password.update');
 
- 
+
   // الفورم يرسل مباشرة
 Route::post('forgot-password', [PasswordResetLinkController::class, 'storeDirect'])->middleware('guest')->name('password.email');
+
+//     routes/web.php مؤقتاً للاختبار
+Route::get('/test-auth', function() {
+    $user = auth()->user();
+
+    if (!$user) {
+        return 'لم يتم تسجيل الدخول';
+    }
+
+    return [
+        'user_id' => $user->id,
+        'user_name' => $user->name,
+        'user_role' => $user->role,
+        'isAdmin' => $user->isAdmin() ? 'نعم' : 'لا',
+        'isVolunteer' => $user->isVolunteer() ? 'نعم' : 'لا',
+        'isBeneficiary' => $user->isBeneficiary() ? 'نعم' : 'لا'
+    ];
+})->middleware('auth');

@@ -1,5 +1,5 @@
 <?php
- 
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class DistributionController extends Controller
         $distributions = Distribution::with(['volunteer', 'beneficiary', 'donation'])
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-            
+
         return view('admin.distributions.index', compact('distributions'));
     }
 

@@ -7,9 +7,9 @@
     <div class="w-full max-w-md bg-white shadow-lg rounded-lg p-6">
         <!-- الشعار -->
         <div class="text-center mb-6">
-            <img src="{{ asset('images/logo.png') }}" alt="شعار المنصة" class="mx-auto w-24 h-24">
+            <img src="{{ asset('images/OIP.webp') }}" alt="شعار المنصة" class=" w-20 h-20">
             <h1 class="text-2xl font-bold text-gray-800 mt-2">منصة المساعدات الإنسانية</h1>
-            <p class="text-gray-600">إعادة تعيين كلمة المرور الخاصة بك</p>
+            <p class="text-red-600 font-bold">إعادة تعيين كلمة المرور الخاصة بك</p>
         </div>
 
         <!-- إشعارات النجاح والخطأ -->
